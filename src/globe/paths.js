@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import _ from 'lodash';
 import Curve from './Curve';
 import { rootMesh } from './scene';
 import { CURVE_COLOR } from './constants';

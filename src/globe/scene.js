@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import Hammer from 'hammerjs';
 import { clamp } from './utils';
-import { GLOBE_RADIUS, PI_TWO } from './constants';
+import { PI_TWO } from './constants';
 
 // import { TubeAnim, TubeStatic, CurveStatic, CurveAnim } from './curve';
 // import { BoxStatic, BoxAnim } from './marker';
