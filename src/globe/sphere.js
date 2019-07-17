@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { GLOBE_RADIUS } from './constants';
 import { rootMesh } from './scene';
-// import { GLOBE_RADIUS } from './constants';
 
 const COLOR_SPHERE_NIGHT = 0xa58945;
 
