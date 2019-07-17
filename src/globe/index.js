@@ -7,7 +7,7 @@ export default function initGlobe(container) {
   initScene(container);
   initSphere();
   
-  axios.get('https://ecomfe.github.io/echarts-examples/public/data/asset/data/flights.json')
+  axios.get('../data/flights.json')
     .then(res => {
       const routes = res.data.routes.slice(0, 10000);
       const airports = res.data.airports;
