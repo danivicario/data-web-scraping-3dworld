@@ -6,7 +6,7 @@ export const GLOBE_CENTER = new THREE.Vector3(0, 0, 0);
 export const PI_TWO = Math.PI * 2;
 export const PI_HALF = Math.PI / 2;
 
-export const CURVE_SEGMENTS = 32;
+export const CURVE_SEGMENTS = 16;
 export const CURVE_MIN_ALTITUDE = 20;
 export const CURVE_MAX_ALTITUDE = 120;
-export const CURVE_COLOR = 0x00ff00;
+export const CURVE_COLOR = 0xcccccc;
