@@ -3,10 +3,6 @@ import Hammer from 'hammerjs';
 import { clamp } from './utils';
 import { PI_TWO } from './constants';
 
-// import { TubeAnim, TubeStatic, CurveStatic, CurveAnim } from './curve';
-// import { BoxStatic, BoxAnim } from './marker';
-// import { play as playPathAnim } from './paths';
-
 let _deltaX = 0;
 let _deltaY = 0;
 let _startX = 0;
@@ -55,7 +51,7 @@ export function init(container) {
   scene.add(rootMesh);
 
   // lighting
-  const light = new THREE.HemisphereLight(0xffffff, 0xffffff, 2);
+  const light = new THREE.HemisphereLight(0xffffff, 0xccc, 2);
   scene.add(light);
 
   // init event listeners

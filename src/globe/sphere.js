@@ -8,7 +8,7 @@ export function init() {
   const geometry = new THREE.SphereGeometry(GLOBE_RADIUS, 40, 30);
   const loader = new THREE.TextureLoader();
   const material = new THREE.MeshPhongMaterial({
-    map: loader.load('https://i.imgur.com/45naBE9.jpg'),
+    map: loader.load('../1_earth_8k.jpg'),
     color: COLOR_SPHERE_NIGHT
   });
   const mesh = new THREE.Mesh(geometry, material);
