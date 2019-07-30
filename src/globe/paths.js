@@ -1,4 +1,5 @@
 // https://threejs.org/examples/webgl_custom_attributes_lines.html
+// http://learningthreejs.com/blog/2013/09/16/how-to-make-the-earth-in-webgl/
 
 import * as THREE from 'three'
 import Curve from './Curve'
