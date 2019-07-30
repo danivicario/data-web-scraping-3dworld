@@ -1,0 +1,16 @@
+[
+  {
+    "timestamp": 1563381109.463975,
+    "predator_longitude": -84.144,
+    "predator_latitude": 33.4506,
+    "prey_longitude": 13.4167,
+    "prey_latitude": 52.5
+  },
+  {
+    "timestamp": 1563381109.5007157,
+    "predator_longitude": -84.144,
+    "predator_latitude": 33.4506,
+    "prey_longitude": 13.4167,
+    "prey_latitude": 52.5
+  }
+]
