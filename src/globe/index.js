@@ -7,19 +7,19 @@ export default function initGlobe(container) {
   initScene(container);
   initSphere();
   
-  axios.get('../data/flights.json')
+  axios.get('../data/attacks.json')
     .then(res => {
-      const routes = res.data.routes.slice(0, 10000);
-      const airports = res.data.airports;
-      const coords = routes.map(route => {
-        const startAirport = airports[route[1]];
-        const endAirport = airports[route[2]];
-        const startLat = startAirport[4];
-        const startLng = startAirport[3];
-        const endLat = endAirport[4];
-        const endLng = endAirport[3];
+      let data = res.data
+
+      const coords = data.map(attack => {
+        const startLat = attack.predator_latitude;
+        const startLng = attack.predator_longitude;
+        const endLat = attack.prey_latitude;
+        const endLng = attack.prey_longitude;
         return [ startLat, startLng, endLat, endLng ];
       });
+
+      debugger
 
       initPaths(coords);
     })
