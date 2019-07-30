@@ -12,6 +12,7 @@ export function init (allCoords, xxxxx) {
     transparent: true,
     color: CURVE_COLOR
   })
+
   const curveMesh = new THREE.Mesh()
 
   allCoords.forEach(coords => {
@@ -19,5 +20,15 @@ export function init (allCoords, xxxxx) {
     curveMesh.add(curve.mesh)
   })
 
+  for (var i = 1; i< rootMesh.children.length; i++) {
+    rootMesh.remove(rootMesh.children[i])
+  }
+
   rootMesh.add(curveMesh)
+}
+
+export function destroyPaths () {
+  for (var i = 1; i< rootMesh.children.length; i++) {
+    rootMesh.remove(rootMesh.children[i])
+  }
 }

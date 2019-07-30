@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { init as initScene } from './scene'
 import { init as initSphere } from './sphere'
-import { init as initPaths } from './paths'
+import { init as initPaths, destroyPaths } from './paths'
 
 export default function initGlobe (container) {
   initScene(container)
@@ -21,7 +21,16 @@ export default function initGlobe (container) {
         return [startLat, startLng, endLat, endLng]
       })
 
-      initPaths(coords, 16)
+      var x1 = 0
+
+      let intervalID = setInterval(() => {
+        initPaths(coords, x1++)
+
+        if (x1 > 50) {
+          destroyPaths()
+          clearInterval(intervalID)
+        }
+      }, 100)
     })
     .catch(err => {
       console.log(err)

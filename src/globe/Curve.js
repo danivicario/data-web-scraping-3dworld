@@ -31,5 +31,8 @@ export default class Curve {
     this.curveGeometry.setDrawRange(0, xxxx)
 
     this.mesh = new THREE.Line(this.curveGeometry, this.material)
+    this.mesh.userData = {
+      line: true
+    }
   }
 }
