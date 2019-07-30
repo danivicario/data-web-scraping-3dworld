@@ -4,10 +4,11 @@
   "private": true,
   "dependencies": {
     "axios": "0.17.0",
-    "three": "0.88.0",
     "d3-geo": "1.9.0",
+    "eslint": "^5.0.0",
     "hammerjs": "2.0.8",
-    "eslint": "^5.0.0"
+    "three": "0.88.0",
+    "three-orbitcontrols": "^2.102.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,26 +1,35 @@
-import * as THREE from 'three';
-import { getSplineFromCoords } from './utils';
-import { CURVE_SEGMENTS } from './constants';
+import * as THREE from 'three'
+import { getSplineFromCoords } from './utils'
+import { CURVE_SEGMENTS } from './constants'
 
-export default function Curve(coords, material) {
-  const { spline } = getSplineFromCoords(coords);
+export default class Curve {
+  constructor (coords, material, xxxx) {
+    this.material = material;
+    this.xxxx = xxxx;
 
-  // add curve geometry
-  const curveGeometry = new THREE.BufferGeometry();
-  const points = new Float32Array(CURVE_SEGMENTS * 3);
-  const vertices = spline.getPoints(CURVE_SEGMENTS - 1);
+    const { spline } = getSplineFromCoords(coords)
 
-  for (let i = 0, j = 0; i < vertices.length; i++) {
-    const vertex = vertices[i];
-    points[j++] = vertex.x;
-    points[j++] = vertex.y;
-    points[j++] = vertex.z;
+    // add curve geometry
+    this.curveGeometry = new THREE.BufferGeometry()
+    this.points = new Float32Array(CURVE_SEGMENTS * 3)
+    const vertices = spline.getPoints(CURVE_SEGMENTS - 1)
+
+    for (let i = 0, j = 0; i < vertices.length; i++) {
+      const vertex = vertices[i]
+      this.points[j++] = vertex.x
+      this.points[j++] = vertex.y
+      this.points[j++] = vertex.z
+    }
+
+    this.animate(this.xxxx)
   }
 
-  // !!!
-  // You can use setDrawRange to animate the curve
-  curveGeometry.addAttribute('position', new THREE.BufferAttribute(points, 3));
-  curveGeometry.setDrawRange(0, CURVE_SEGMENTS);
+  animate(xxxx) {
+    // !!!
+    // You can use setDrawRange to animate the curve
+    this.curveGeometry.addAttribute('position', new THREE.BufferAttribute(this.points, 3))
+    this.curveGeometry.setDrawRange(0, xxxx)
 
-  this.mesh = new THREE.Line(curveGeometry, material);
+    this.mesh = new THREE.Line(this.curveGeometry, this.material)
+  }
 }
