@@ -31,17 +31,17 @@ export default function initGlobe (container) {
       })
 
       function filter () {
-        let dateStart =
+        const dateStart =
           document.querySelector('#controls .search-date').value +
           ' ' +
           document.querySelector('#controls .search-date-start').value
-        let dateEnd =
+        const dateEnd =
           document.querySelector('#controls .search-date').value +
           ' ' +
           document.querySelector('#controls .search-date-end').value
 
-        let epochStart = moment(dateStart).unix()
-        let epochEnd = moment(dateEnd).unix()
+        const epochStart = moment(dateStart).unix()
+        const epochEnd = moment(dateEnd).unix()
 
         return filteredData.filter(attack => {
           return (
@@ -52,7 +52,7 @@ export default function initGlobe (container) {
       }
 
       function filterAndUpdateTotals () {
-        let data = filter()
+        const data = filter()
         document.querySelector('#controls .totals').innerHTML = data.length
       }
 
@@ -72,7 +72,7 @@ export default function initGlobe (container) {
 
       document.querySelector('#controls .search-button').onclick = function () {
         clearInterval(intervalID)
-        let data = filter()
+        const data = filter()
 
         const coords = data.map(attack => {
           const startLat = attack.predator_latitude

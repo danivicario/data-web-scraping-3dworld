@@ -13,7 +13,7 @@ export function init (allCoords, step) {
 
   destroyPaths()
 
-  const curveMesh = new THREE.Mesh()
+  const curveMesh = new THREE.Group()
   let curve
 
   allCoords.forEach(coords => {

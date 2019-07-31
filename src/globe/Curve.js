@@ -15,10 +15,10 @@ export default class Curve {
     this.points = new Float32Array(CURVE_SEGMENTS * 3)
     const vertices = spline.getPoints(CURVE_SEGMENTS - 1)
 
-    let geometryOrigin = new THREE.SphereGeometry(1, 0.2, 0.2)
-    let materialOrigin = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-    let geometryDestination = new THREE.SphereGeometry(1, 0.2, 0.2)
-    let materialDestination = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+    const geometryOrigin = new THREE.SphereGeometry(1, 0.2, 0.2)
+    const materialOrigin = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+    const geometryDestination = new THREE.SphereGeometry(1, 0.2, 0.2)
+    const materialDestination = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
 
     this.meshOrigin = new THREE.Mesh(geometryOrigin, materialOrigin)
     this.meshOrigin.position.x = vertices[0].x
@@ -41,15 +41,26 @@ export default class Curve {
     }
 
     this.animate(this.currentCurveStep)
+
+    const bufferAttribute = new THREE.BufferAttribute(this.points, 3)
+    
+    this.curveGeometry.addAttribute(
+      'position',
+      bufferAttribute
+    )
+    this.curveGeometry.setDrawRange(1, currentCurveStep)
+
+    this.mesh = new THREE.Line(this.curveGeometry, this.material)
+    // this.mesh = new THREE.Mesh()
   }
 
   animate (currentCurveStep) {
-    this.curveGeometry.addAttribute(
-      'position',
-      new THREE.BufferAttribute(this.points, 3)
-    )
-    this.curveGeometry.setDrawRange(0, currentCurveStep)
+    // this.curveGeometry.addAttribute(
+    //   'position',
+    //   new THREE.BufferAttribute(this.points, 3)
+    // )
+    // this.curveGeometry.setDrawRange(0, currentCurveStep)
 
-    this.mesh = new THREE.Line(this.curveGeometry, this.material)
+    // this.mesh = new THREE.Line(this.curveGeometry, this.material)
   }
 }
