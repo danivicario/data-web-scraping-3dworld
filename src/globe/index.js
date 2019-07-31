@@ -67,7 +67,10 @@ export default function initGlobe (container) {
 
       filterAndUpdateTotals()
 
+      let intervalID;
+
       document.querySelector('#controls .search-button').onclick = function () {
+        clearInterval(intervalID)
         let data = filter()
 
         const coords = data.map(attack => {
@@ -78,13 +81,15 @@ export default function initGlobe (container) {
           return [startLat, startLng, endLat, endLng]
         })
 
+        // (intervalID) ? clearInterval(intervalID) : null;
+        destroyPaths()
+
         var pathStep = 0
 
-        let intervalID = setInterval(() => {
+        intervalID = setInterval(() => {
           initPaths(coords, pathStep++)
 
           if (pathStep > 50) {
-            destroyPaths()
             clearInterval(intervalID)
           }
         }, 100)
