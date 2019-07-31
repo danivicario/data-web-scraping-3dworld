@@ -3,9 +3,9 @@ import { getSplineFromCoords } from './utils'
 import { CURVE_SEGMENTS } from './constants'
 
 export default class Curve {
-  constructor (coords, material, xxxx) {
-    this.material = material;
-    this.xxxx = xxxx;
+  constructor (coords, material, currentCurveStep) {
+    this.material = material
+    this.currentCurveStep = currentCurveStep
 
     const { spline } = getSplineFromCoords(coords)
 
@@ -21,14 +21,15 @@ export default class Curve {
       this.points[j++] = vertex.z
     }
 
-    this.animate(this.xxxx)
+    this.animate(this.currentCurveStep)
   }
 
-  animate(xxxx) {
-    // !!!
-    // You can use setDrawRange to animate the curve
-    this.curveGeometry.addAttribute('position', new THREE.BufferAttribute(this.points, 3))
-    this.curveGeometry.setDrawRange(0, xxxx)
+  animate (currentCurveStep) {
+    this.curveGeometry.addAttribute(
+      'position',
+      new THREE.BufferAttribute(this.points, 3)
+    )
+    this.curveGeometry.setDrawRange(0, currentCurveStep)
 
     this.mesh = new THREE.Line(this.curveGeometry, this.material)
     this.mesh.userData = {

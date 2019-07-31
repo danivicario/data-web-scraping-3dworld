@@ -9,15 +9,15 @@ export function init (container) {
   const camera = new THREE.PerspectiveCamera(30, width / height, 1, 30000)
   const renderer = new THREE.WebGLRenderer({ antialias: true })
   const controls = new OrbitControls(camera, renderer.domElement)
-  let stars=[];
+  let stars = []
 
   controls.enableDamping = true
   controls.dampingFactor = 0.1
 
-  function randomFloat(min, max) {
-      return Math.random() * (max - min) + min;
+  function randomFloat (min, max) {
+    return Math.random() * (max - min) + min
   }
-  
+
   function addStarField () {
     // The loop will move from z position of -1000 to z position 1000, adding a random particle at each position.
     for (var z = -1000; z < 1000; z += 5) {
@@ -61,7 +61,7 @@ export function init (container) {
   addStarField()
 
   // lighting
-  const light = new THREE.HemisphereLight(0xffcccc, 0xffffff, 2)
+  const light = new THREE.HemisphereLight(0xffffff, 0x222222, 2.5)
   scene.add(light)
 
   initResizeListener(container, camera, renderer)

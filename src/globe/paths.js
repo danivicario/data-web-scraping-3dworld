@@ -21,7 +21,7 @@ export function init (allCoords, step) {
     curveMesh.add(curve.mesh)
   })
 
-  for (var i = 1; i< rootMesh.children.length; i++) {
+  for (var i = 1; i < rootMesh.children.length; i++) {
     rootMesh.remove(rootMesh.children[i])
   }
 
@@ -29,7 +29,7 @@ export function init (allCoords, step) {
 }
 
 export function destroyPaths () {
-  for (var i = 1; i< rootMesh.children.length; i++) {
+  for (var i = 1; i < rootMesh.children.length; i++) {
     rootMesh.remove(rootMesh.children[i])
   }
 }
