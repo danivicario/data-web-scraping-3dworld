@@ -89,10 +89,10 @@ export default function initGlobe (container) {
         intervalID = setInterval(() => {
           initPaths(coords, pathStep++)
 
-          if (pathStep > 50) {
+          if (pathStep > 160) {
             clearInterval(intervalID)
           }
-        }, 100)
+        }, 10)
       }
     })
     .catch(err => {

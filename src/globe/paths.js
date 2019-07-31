@@ -6,7 +6,7 @@ import Curve from './Curve'
 import { rootMesh } from './scene'
 import { CURVE_COLOR } from './constants'
 
-export function init (allCoords, xxxxx) {
+export function init (allCoords, step) {
   const material = new THREE.MeshBasicMaterial({
     blending: THREE.AdditiveBlending,
     opacity: 0.8,
@@ -17,7 +17,7 @@ export function init (allCoords, xxxxx) {
   const curveMesh = new THREE.Mesh()
 
   allCoords.forEach(coords => {
-    const curve = new Curve(coords, material, xxxxx)
+    const curve = new Curve(coords, material, step)
     curveMesh.add(curve.mesh)
   })
 
