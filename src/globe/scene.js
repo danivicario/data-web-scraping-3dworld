@@ -45,10 +45,10 @@ export function init (container) {
   }
 
   const play = () => {
+    requestAnimationFrame(play)
+    rootMesh.rotation.y += .0005
     renderer.render(scene, camera)
     controls.update()
-    rootMesh.rotation.y += .0005
-    requestAnimationFrame(play)
   }
 
   // init scene

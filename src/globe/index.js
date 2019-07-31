@@ -2,6 +2,7 @@ import axios from 'axios'
 import { init as initScene } from './scene'
 import { init as initSphere } from './sphere'
 import { init as initPaths, destroyPaths } from './paths'
+import { CURVE_SEGMENTS } from './constants'
 import moment from 'moment'
 
 export default function initGlobe (container) {
@@ -67,7 +68,7 @@ export default function initGlobe (container) {
 
       filterAndUpdateTotals()
 
-      let intervalID;
+      let intervalID
 
       document.querySelector('#controls .search-button').onclick = function () {
         clearInterval(intervalID)
@@ -88,7 +89,7 @@ export default function initGlobe (container) {
         intervalID = setInterval(() => {
           initPaths(coords, pathStep++)
 
-          if (pathStep > 160) {
+          if (pathStep > CURVE_SEGMENTS) {
             clearInterval(intervalID)
           }
         }, 10)

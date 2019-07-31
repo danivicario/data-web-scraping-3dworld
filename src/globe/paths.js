@@ -14,16 +14,17 @@ export function init (allCoords, step) {
     color: CURVE_COLOR
   })
 
+  destroyPaths()
+
   const curveMesh = new THREE.Mesh()
+  let curve;
 
   allCoords.forEach(coords => {
-    const curve = new Curve(coords, material, step)
+    curve = new Curve(coords, material, step)
     curveMesh.add(curve.mesh)
+    curveMesh.add(curve.meshOrigin)
+    curveMesh.add(curve.meshDestination)
   })
-
-  for (var i = 1; i < rootMesh.children.length; i++) {
-    rootMesh.remove(rootMesh.children[i])
-  }
 
   rootMesh.add(curveMesh)
 }
