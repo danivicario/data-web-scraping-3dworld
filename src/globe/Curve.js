@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { getSplineFromCoords } from "./utils";
 import { CURVE_SEGMENTS } from "./constants";
-
 export default class Curve {
 	constructor(coords, material, currentCurveStep) {
 		this.material = material;

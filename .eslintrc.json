@@ -1,3 +1,4 @@
+// https://travishorn.com/setting-up-prettier-on-vs-code-1fd5e5a43523
 {
     "env": {
         "browser": true,
