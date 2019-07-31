@@ -41,26 +41,15 @@ export default class Curve {
     }
 
     this.animate(this.currentCurveStep)
-
-    const bufferAttribute = new THREE.BufferAttribute(this.points, 3)
-    
-    this.curveGeometry.addAttribute(
-      'position',
-      bufferAttribute
-    )
-    this.curveGeometry.setDrawRange(1, currentCurveStep)
-
-    this.mesh = new THREE.Line(this.curveGeometry, this.material)
-    // this.mesh = new THREE.Mesh()
   }
 
   animate (currentCurveStep) {
-    // this.curveGeometry.addAttribute(
-    //   'position',
-    //   new THREE.BufferAttribute(this.points, 3)
-    // )
-    // this.curveGeometry.setDrawRange(0, currentCurveStep)
+    this.curveGeometry.addAttribute(
+      'position',
+      new THREE.BufferAttribute(this.points, 3)
+    )
+    this.curveGeometry.setDrawRange(0, currentCurveStep)
 
-    // this.mesh = new THREE.Line(this.curveGeometry, this.material)
+    this.mesh = new THREE.Line(this.curveGeometry, this.material)
   }
 }
