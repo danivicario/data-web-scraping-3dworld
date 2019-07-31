@@ -9,7 +9,7 @@ export const INITIAL_CAMERA_POSITION = 1100;
 export const PI_TWO = Math.PI * 2;
 export const PI_HALF = Math.PI / 2;
 
-export const CURVE_SEGMENTS = 45;
+export const CURVE_SEGMENTS = 80;
 export const CURVE_MIN_ALTITUDE = 20;
 export const CURVE_MAX_ALTITUDE = 220;
 export const CURVE_COLOR = 0xeeeeee;
