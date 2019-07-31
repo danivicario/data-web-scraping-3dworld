@@ -1,33 +1,43 @@
 // https://threejs.org/examples/webgl_custom_attributes_lines.html
 // http://learningthreejs.com/blog/2013/09/16/how-to-make-the-earth-in-webgl/
 
-import * as THREE from 'three'
-import Curve from './Curve'
-import { rootMesh } from './scene'
-import { CURVE_COLOR } from './constants'
+import * as THREE from "three";
+import Curve from "./Curve";
+import { rootMesh } from "./scene";
+import { CURVE_COLOR } from "./constants";
 
-export function init (allCoords, step) {
-  const material = new THREE.MeshBasicMaterial({
-    color: CURVE_COLOR
-  })
+export default class Path {
+	constructor(allCoords) {
+		this.allCoords = allCoords;
+		const material = new THREE.MeshBasicMaterial({
+			color: CURVE_COLOR
+		});
+		this.curves = [];
 
-  destroyPaths()
+		this.allCoords.forEach((coords, idx) => {
+			this.curves[idx] = new Curve(coords, material);
+		});
+	}
 
-  const curveMesh = new THREE.Group()
-  let curve
+	animate(step) {
+		this.destroyPaths();
 
-  allCoords.forEach(coords => {
-    curve = new Curve(coords, material, step)
-    curveMesh.add(curve.mesh)
-    curveMesh.add(curve.meshOrigin)
-    curveMesh.add(curve.meshDestination)
-  })
+		this.curveMesh = new THREE.Group();
 
-  rootMesh.add(curveMesh)
-}
+		this.allCoords.forEach((n, idx) => {
+			const curve = this.curves[idx];
+			curve.animate(step);
+			this.curveMesh.add(curve.mesh);
+			this.curveMesh.add(curve.meshOrigin);
+			this.curveMesh.add(curve.meshDestination);
+		});
 
-export function destroyPaths () {
-  for (var i = 1; i < rootMesh.children.length; i++) {
-    rootMesh.remove(rootMesh.children[i])
-  }
+		rootMesh.add(this.curveMesh);
+	}
+
+	destroyPaths() {
+		for (var i = 1; i < rootMesh.children.length; i++) {
+			rootMesh.remove(rootMesh.children[i]);
+		}
+	}
 }

@@ -3,7 +3,7 @@
         "browser": true,
         "es6": true
     },
-    "extends": "standard",
+    "extends": "plugin:prettier/recommended",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -19,5 +19,11 @@
         "react"
     ],
     "rules": {
+        "semi" : 2,
+        "quotes": 0,
+        "no-async-promise-executor": 0,
+        "no-misleading-character-class": 0,
+        "no-useless-catch": 0,
+        "max-len": ["error", { "code": 90 }]
     }
 }
