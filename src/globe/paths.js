@@ -8,16 +8,13 @@ import { CURVE_COLOR } from './constants'
 
 export function init (allCoords, step) {
   const material = new THREE.MeshBasicMaterial({
-    blending: THREE.AdditiveBlending,
-    opacity: 0.8,
-    transparent: true,
     color: CURVE_COLOR
   })
 
   destroyPaths()
 
   const curveMesh = new THREE.Mesh()
-  let curve;
+  let curve
 
   allCoords.forEach(coords => {
     curve = new Curve(coords, material, step)

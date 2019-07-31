@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { init as initScene } from './scene'
-import { init as initSphere } from './sphere'
+import { init as initSphere } from './planet'
 import { init as initPaths, destroyPaths } from './paths'
 import { CURVE_SEGMENTS } from './constants'
 import moment from 'moment'

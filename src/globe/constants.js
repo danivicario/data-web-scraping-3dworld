@@ -1,12 +1,15 @@
-import * as THREE from 'three';
+import * as THREE from 'three'
 
-export const GLOBE_RADIUS = 200;
-export const GLOBE_CENTER = new THREE.Vector3(0, 0, 0);
+export const PLANET_RADIUS = 200
+export const PLANET_QUALITY = 25
+export const PLANET_CENTER = new THREE.Vector3(0, 0, 0)
 
-export const PI_TWO = Math.PI * 2;
-export const PI_HALF = Math.PI / 2;
+export const INITIAL_CAMERA_POSITION = 1100
 
-export const CURVE_SEGMENTS = 20*3;
-export const CURVE_MIN_ALTITUDE = 20;
-export const CURVE_MAX_ALTITUDE = 120;
-export const CURVE_COLOR = 0xcccccc;
+export const PI_TWO = Math.PI * 2
+export const PI_HALF = Math.PI / 2
+
+export const CURVE_SEGMENTS = 45
+export const CURVE_MIN_ALTITUDE = 20
+export const CURVE_MAX_ALTITUDE = 220
+export const CURVE_COLOR = 0xEEEEEE

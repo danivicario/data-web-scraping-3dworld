@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 import OrbitControls from 'three-orbitcontrols'
+import { INITIAL_CAMERA_POSITION } from './constants'
+
 export const scene = new THREE.Scene()
 export const rootMesh = new THREE.Mesh(new THREE.Geometry())
 
@@ -18,55 +20,55 @@ export function init (container) {
     return Math.random() * (max - min) + min
   }
 
-  function addStarField () {
-    // The loop will move from z position of -1000 to z position 1000, adding a random particle at each position.
-    for (var z = -1000; z < 1000; z += 5) {
-      // Make a sphere (exactly the same as before).
-      var geometry = new THREE.SphereGeometry(0.5, 32, 32)
-      var material = new THREE.MeshBasicMaterial({ color: 0xffffff })
-      var sphere = new THREE.Mesh(geometry, material)
-
-      // This time we give the sphere random x and y positions between -500 and 500
-      sphere.position.x = randomFloat(-1000, 1000)
-      sphere.position.y = randomFloat(-500, 500)
-
-      // Then set the z position to where it is in the loop (distance of camera)
-      sphere.position.z = z
-
-      // scale it up a bit
-      sphere.scale.x = sphere.scale.y = 2
-
-      // add the sphere to the scene
-      scene.add(sphere)
-
-      // finally push it to the stars array
-      stars.push(sphere)
-    }
-  }
-
-  const play = () => {
+  function play () {
     requestAnimationFrame(play)
-    rootMesh.rotation.y += .0005
+    rootMesh.rotation.y += 0.0005
     renderer.render(scene, camera)
     controls.update()
   }
 
+  function addStarField () {
+    function addStars (z) {
+      var geometry = new THREE.SphereGeometry(2, 5, 5)
+      var material = new THREE.MeshBasicMaterial({ color: 0xffffff })
+      var planet = new THREE.Mesh(geometry, material)
+
+      planet.position.x = randomFloat(-5000, 5000)
+      planet.position.y = randomFloat(-3500, 3500)
+      planet.position.z = z
+
+      scene.add(planet)
+
+      stars.push(planet)
+    }
+    for (var z = -2000; z < -INITIAL_CAMERA_POSITION; z += 1) {
+      addStars(z)
+    }
+
+    for (z = INITIAL_CAMERA_POSITION; z < 2000; z += 1) {
+      addStars(z)
+    }
+  }
+
+  function addLights () {
+    const light = new THREE.HemisphereLight(0xffffff, 0x000000, 1.7)
+    light.castShadow = true
+    scene.add(light)
+  }
+
   // init scene
+  initResizeListener(container, camera, renderer)
+
   renderer.setSize(width, height)
   container.appendChild(renderer.domElement)
-  camera.position.z = 1100
+  camera.position.z = INITIAL_CAMERA_POSITION
 
   // add rootMesh to scene
   scene.add(rootMesh)
 
   addStarField()
 
-  // lighting
-  const light = new THREE.HemisphereLight(0xffffff, 0x222222, 1.75)
-  light.castShadow = true
-  scene.add(light)
-
-  initResizeListener(container, camera, renderer)
+  addLights()
 
   play()
 }

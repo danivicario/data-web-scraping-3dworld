@@ -15,21 +15,24 @@ export default class Curve {
     this.points = new Float32Array(CURVE_SEGMENTS * 3)
     const vertices = spline.getPoints(CURVE_SEGMENTS - 1)
 
-    let geometryOrigin = new THREE.SphereGeometry(2, 0.2, 0.2)
+    let geometryOrigin = new THREE.SphereGeometry(1, 0.2, 0.2)
     let materialOrigin = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-    let geometryDestination = new THREE.SphereGeometry(2, 0.2, 0.2)
+    let geometryDestination = new THREE.SphereGeometry(1, 0.2, 0.2)
     let materialDestination = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
 
     this.meshOrigin = new THREE.Mesh(geometryOrigin, materialOrigin)
     this.meshOrigin.position.x = vertices[0].x
     this.meshOrigin.position.y = vertices[0].y
     this.meshOrigin.position.z = vertices[0].z
-    
-    this.meshDestination = new THREE.Mesh(geometryDestination, materialDestination)
+
+    this.meshDestination = new THREE.Mesh(
+      geometryDestination,
+      materialDestination
+    )
     this.meshDestination.position.x = vertices[vertices.length - 1].x
     this.meshDestination.position.y = vertices[vertices.length - 1].y
     this.meshDestination.position.z = vertices[vertices.length - 1].z
-    
+
     for (let i = 0, j = 0; i < vertices.length; i++) {
       const vertex = vertices[i]
       this.points[j++] = vertex.x
