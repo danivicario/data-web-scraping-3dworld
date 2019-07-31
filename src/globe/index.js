@@ -81,7 +81,6 @@ export default function initGlobe (container) {
           return [startLat, startLng, endLat, endLng]
         })
 
-        // (intervalID) ? clearInterval(intervalID) : null;
         destroyPaths()
 
         var pathStep = 0

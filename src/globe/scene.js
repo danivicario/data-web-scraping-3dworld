@@ -47,6 +47,7 @@ export function init (container) {
   const play = () => {
     renderer.render(scene, camera)
     controls.update()
+    rootMesh.rotation.y += .0005
     requestAnimationFrame(play)
   }
 
@@ -61,7 +62,8 @@ export function init (container) {
   addStarField()
 
   // lighting
-  const light = new THREE.HemisphereLight(0xffffff, 0x222222, 2.5)
+  const light = new THREE.HemisphereLight(0xffffff, 0x222222, 1.75)
+  light.castShadow = true
   scene.add(light)
 
   initResizeListener(container, camera, renderer)
