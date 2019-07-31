@@ -6,9 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Yoni&Vica cyber attack watch</title>
+    <style>
+        #controls {
+            position: absolute;
+            padding: 10px;
+            background: white;
+            z-index: 1;
+            border-radius: 10px;
+            left: 5px;
+            top: 5px;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="controls">
+        <input type="date" class="search-date" />
+        <input type="time" class="search-date-start" placeholder="start">
+        <input type="time" class="search-date-end" placeholder="end">
+        <h3>Total attacks: <span class="totals"></span></h3>
+        <button class="search-button">Search</button>
+    </div>
     <div id="globe-app" class="globe-app"></div>
 </body>
 
