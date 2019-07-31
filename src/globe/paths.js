@@ -9,7 +9,7 @@ import { CURVE_COLOR } from './constants'
 export function init (allCoords, xxxxx) {
   const material = new THREE.MeshBasicMaterial({
     blending: THREE.AdditiveBlending,
-    opacity: 0.2,
+    opacity: 0.8,
     transparent: true,
     color: CURVE_COLOR
   })
