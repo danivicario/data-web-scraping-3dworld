@@ -1,3 +1,4 @@
-# webgl-globe-2-xakc9x
+# yoni-3dworld
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/webgl-globe-2-xakc9x)
+npm run install
+npm start
