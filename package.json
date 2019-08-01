@@ -1,9 +1,8 @@
 {
-  "name": "webgl-globe-2",
+  "name": "",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "axios": "0.17.0",
     "d3": "^5.9.7",
     "d3-geo": "1.9.0",
     "moment": "^2.24.0",

@@ -11,17 +11,12 @@ export function init(container) {
 	const camera = new THREE.PerspectiveCamera(30, width / height, 1, 30000);
 	const renderer = new THREE.WebGLRenderer({ antialias: true });
 	const controls = new OrbitControls(camera, renderer.domElement);
-	const stars = [];
 
 	controls.enableDamping = true;
 	controls.dampingFactor = 0.1;
 
 	function randomFloat(min, max) {
 		return Math.random() * (max - min) + min;
-	}
-
-	function randomInt(min, max) {
-		return Math.floor(Math.random() * (max - min + 1) + min);
 	}
 
 	function play() {

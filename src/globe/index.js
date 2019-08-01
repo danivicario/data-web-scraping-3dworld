@@ -1,4 +1,3 @@
-import axios from "axios";
 import { init as initScene } from "./scene";
 import { init as initSphere } from "./planet";
 import Path from "./paths";
@@ -15,10 +14,9 @@ export default function initGlobe(container) {
 		return [...new Map(arr.map((item) => [item[key], item])).values()];
 	}
 
-	axios
-		.get("../data/geo_attack_all.json")
-		.then((res) => {
-			let data = res.data;
+	fetch("../data/geo_attack_all.json")
+		.then((res) => res.json())
+		.then((data) => {
 			data = getUniqueListBy(data, "predator_longitude");
 			data = getUniqueListBy(data, "predator_latitude");
 			data = getUniqueListBy(data, "prey_latitude");
