@@ -2,20 +2,18 @@
 // http://learningthreejs.com/blog/2013/09/16/how-to-make-the-earth-in-webgl/
 
 import * as THREE from "three";
+import * as d3 from "d3";
 import Curve from "./Curve";
 import { rootMesh } from "./scene";
-import { CURVE_COLOR } from "./constants";
+import { CURVE_COLOR, CURVE_SEGMENTS } from "./constants";
 
 export default class Path {
 	constructor(allCoords) {
 		this.allCoords = allCoords;
-		const material = new THREE.MeshBasicMaterial({
-			color: CURVE_COLOR
-		});
 		this.curves = [];
 
 		this.allCoords.forEach((coords, idx) => {
-			this.curves[idx] = new Curve(coords, material);
+			this.curves[idx] = new Curve(coords);
 		});
 	}
 
@@ -24,9 +22,18 @@ export default class Path {
 
 		this.curveMesh = new THREE.Group();
 
+		const colorScale = d3
+			.scaleLinear()
+			.domain([0, CURVE_SEGMENTS])
+			.range(["green", "red"]);
+
+		const material = new THREE.MeshBasicMaterial({
+			color: colorScale(step)
+		});
+
 		this.allCoords.forEach((n, idx) => {
 			const curve = this.curves[idx];
-			curve.animate(step);
+			curve.animate(step, material);
 			this.curveMesh.add(curve.mesh);
 			this.curveMesh.add(curve.meshOrigin);
 			this.curveMesh.add(curve.meshDestination);

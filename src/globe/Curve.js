@@ -1,11 +1,10 @@
 import * as THREE from "three";
 import { getSplineFromCoords } from "./utils";
-import { CURVE_SEGMENTS } from "./constants";
-export default class Curve {
-	constructor(coords, material, currentCurveStep) {
-		this.material = material;
-		this.currentCurveStep = currentCurveStep;
+import { CURVE_SEGMENTS, MESH_DEFAULT_SCALE } from "./constants";
+import * as Materials from "./materials";
 
+export default class Curve {
+	constructor(coords) {
 		const { spline } = getSplineFromCoords(coords);
 
 		// add curve geometry
@@ -15,11 +14,11 @@ export default class Curve {
 		this.vertices = spline.getPoints(CURVE_SEGMENTS - 1);
 
 		const geometryOrigin = new THREE.SphereGeometry(1, 0.2, 0.2);
-		const materialOrigin = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+		const materialOrigin = new THREE.MeshBasicMaterial(Materials.pointOfOrigin);
 		const geometryDestination = new THREE.SphereGeometry(1, 0.2, 0.2);
-		const materialDestination = new THREE.MeshBasicMaterial({
-			color: 0x00ff00
-		});
+		const materialDestination = new THREE.MeshBasicMaterial(
+			Materials.pointOfDestination
+		);
 
 		this.meshOrigin = new THREE.Mesh(geometryOrigin, materialOrigin);
 		this.meshOrigin.position.x = this.vertices[0].x;
@@ -42,11 +41,44 @@ export default class Curve {
 			"position",
 			new THREE.BufferAttribute(this.points, 3)
 		);
+
+		this.factor = 0.1;
+		this.sense = 1;
+		this.scale = 1;
 	}
 
-	animate(currentCurveStep) {
-		this.curveGeometry.setDrawRange(0, currentCurveStep);
+	_affectMeshes(arr, scale) {
+		arr.forEach((element) => {
+			element.x = scale;
+			element.y = scale;
+			element.z = scale;
+		});
+	}
 
-		this.mesh = new THREE.Line(this.curveGeometry, this.material);
+	animate(currentCurveStep, material) {
+		this.curveGeometry.setDrawRange(0, currentCurveStep);
+		this.scale += this.factor * this.sense;
+
+		this._affectMeshes(
+			[this.meshDestination.scale, this.meshOrigin.scale],
+			this.scale
+		);
+
+		if (this.scale >= 1.5 || this.scale <= 0.25) {
+			this.sense *= -1;
+		}
+
+		this.meshDestination.material.opacity = this.meshOrigin.material.opacity = Math.random();
+
+		if (currentCurveStep >= CURVE_SEGMENTS) {
+			this.meshOrigin.material.opacity = 1;
+			this.meshDestination.material.opacity = 1;
+			this._affectMeshes(
+				[this.meshDestination.scale, this.meshOrigin.scale],
+				MESH_DEFAULT_SCALE
+			);
+		}
+
+		this.mesh = new THREE.Line(this.curveGeometry, material);
 	}
 }

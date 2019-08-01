@@ -20,6 +20,10 @@ export function init(container) {
 		return Math.random() * (max - min) + min;
 	}
 
+	function randomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1) + min);
+	}
+
 	function play() {
 		requestAnimationFrame(play);
 		rootMesh.rotation.y += 0.0005;
@@ -28,26 +32,28 @@ export function init(container) {
 	}
 
 	function addStarField() {
-		function addStars(z) {
-			var geometry = new THREE.SphereGeometry(2, 5, 5);
-			var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-			var planet = new THREE.Mesh(geometry, material);
+		var geometry = new THREE.SphereGeometry(4000, 100, 100);
+		var veryBigSphereForStars = new THREE.Mesh(geometry, undefined);
 
-			planet.position.x = randomFloat(-5000, 5000);
-			planet.position.y = randomFloat(-3500, 3500);
-			planet.position.z = z;
+		veryBigSphereForStars.geometry.vertices
+			.filter((x) => Math.random() > 0.5)
+			.forEach((starCoords) => {
+				const geometry = new THREE.SphereGeometry(7, 3, 3);
+				const material = new THREE.MeshBasicMaterial({
+					color: `rgb(255, 255, 255)`,
+					transparent: true,
+					opacity: Math.random()
+				});
+				const star = new THREE.Mesh(geometry, material);
 
-			scene.add(planet);
+				star.position.x = starCoords.x + randomFloat(-100, 100);
+				star.position.y = starCoords.y + randomFloat(-100, 100);
+				star.position.z = starCoords.z + randomFloat(-100, 100);
 
-			stars.push(planet);
-		}
-		for (var z = -2000; z < -INITIAL_CAMERA_POSITION; z += 1) {
-			addStars(z);
-		}
+				scene.add(star);
+			});
 
-		for (z = INITIAL_CAMERA_POSITION; z < 2000; z += 1) {
-			addStars(z);
-		}
+		// scene.add(veryBigSphereForStars);
 	}
 
 	function addLights() {
@@ -61,7 +67,9 @@ export function init(container) {
 
 	renderer.setSize(width, height);
 	container.appendChild(renderer.domElement);
+	rootMesh.rotation.y = 300;
 	camera.position.z = INITIAL_CAMERA_POSITION;
+	camera.position.y = 280;
 
 	// add rootMesh to scene
 	scene.add(rootMesh);
