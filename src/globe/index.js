@@ -14,7 +14,7 @@ export default function initGlobe(container) {
 		return [...new Map(arr.map((item) => [item[key], item])).values()];
 	}
 
-	fetch("../data/geo_attack_all.json")
+	fetch("data/geo_attack_all.json")
 		.then((res) => res.json())
 		.then((data) => {
 			data = getUniqueListBy(data, "predator_longitude");
