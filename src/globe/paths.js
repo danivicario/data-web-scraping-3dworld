@@ -25,7 +25,7 @@ export default class Path {
 		const colorScale = d3
 			.scaleLinear()
 			.domain([0, CURVE_SEGMENTS])
-			.range(["green", "red"]);
+			.range(["green", "white"]);
 
 		const material = new THREE.MeshBasicMaterial({
 			color: colorScale(step)
