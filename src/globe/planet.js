@@ -10,7 +10,7 @@ export function init() {
 	);
 	const loader = new THREE.TextureLoader();
 	const material = new THREE.MeshPhongMaterial({
-		map: loader.load("../1_mars_8k.jpg")
+		map: loader.load("../1_earth_8k.jpg")
 	});
 	const mesh = new THREE.Mesh(geometry, material);
 
